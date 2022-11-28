@@ -1,12 +1,35 @@
-import './App.css';
+import React, { useState } from "react";
+
+import "./App.css";
 import Square from "./Square";
 
 function App() {
-  const basketball = 'Ankles Broken'
+  const [squares, setSquares] = useState(["", "", "", "", "", "", "", "", ""]);
+  const [player, setPlayer] = useState(true);
+
+  const handleClick = () => {
+    setSquares(["", "", "", "", "", "", "", "", ""]);
+    setPlayer(true);
+  };
 
   return (
     <div className="App">
-      <Square kobe={basketball}/>
+      
+      <div className="container">
+        {squares.map((val, index) => {
+          return (
+            <Square
+              setSquares={setSquares}
+              index={index}
+              squareValue={val}
+              squares={squares}
+              player={player}
+              setPlayer={setPlayer}
+            />
+          );
+        })}
+      </div>
+      <button onClick={handleClick}>Reset</button>
     </div>
   );
 }
